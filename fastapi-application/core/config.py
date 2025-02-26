@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import BaseSettings
 
 
@@ -10,9 +10,14 @@ class ApiPrefix(BaseModel):
     prefix: str = "/api"
 
 
+class DatabaseConfig(BaseModel):
+    url: PostgresDsn
+
+
 class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
+    db: PostgresDsn
 
 
 settings = Settings()
