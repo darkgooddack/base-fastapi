@@ -14,6 +14,10 @@ LOG_DEFAULT_FORMAT = (
     "[%(asctime)s.%(msecs)03d] %(module)10s:%(lineno)-3d %(levelname)-7s - %(message)s"
 )
 
+class Weather(BaseModel):
+    key: str
+    url: str
+
 
 class RunConfig(BaseModel):
     host: str = "0.0.0.0"
@@ -45,6 +49,7 @@ class LoggingConfig(BaseModel):
 class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
     users: str = "/users"
+    weather: str = "/weather"
 
 
 class ApiPrefix(BaseModel):
@@ -85,6 +90,7 @@ class Settings(BaseSettings):
     api: ApiPrefix = ApiPrefix()
     taskiq: TaskiqConfig = TaskiqConfig()
     db: DatabaseConfig
+    weather: Weather
 
 
 settings = Settings()
